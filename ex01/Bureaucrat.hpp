@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:05:34 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/01 20:01:09 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/03 10:08:27 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ class	Bureaucrat
 		static const int	_lowestGrade;
 		std::string	const	_name;
 		int					_grade;
+
+		Bureaucrat(void);
 
 	public:
 		class GradeTooHighException : public std::exception
@@ -49,7 +51,6 @@ class	Bureaucrat
 				virtual const char*	what(void) const throw() override;
 		};
 
-		Bureaucrat(void);
 		Bureaucrat(std::string const &name, int grade);
 		Bureaucrat(Bureaucrat const &c);
 		Bureaucrat&	operator=(Bureaucrat const &rhs);
@@ -59,7 +60,7 @@ class	Bureaucrat
 		int		getGrade(void) const;
 		void	incrementGrade(void);
 		void	decrementGrade(void);
-		void 	checkGradeThrowExcept(void) const;
+		void 	checkGradeThrowExcept(int grade) const;
 		void	signForm(Form &f) const;
 };
 

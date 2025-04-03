@@ -6,15 +6,17 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:05:36 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/01 18:56:31 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/03 10:19:16 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
+// Static variables
 const int	Bureaucrat::_highestGrade = 1;
 const int	Bureaucrat::_lowestGrade = 150;
 
+// Exceptions
 Bureaucrat::GradeTooHighException::GradeTooHighException(std::string const &msg) :
 	_msg(msg)
 {}
@@ -33,29 +35,30 @@ const char*	Bureaucrat::GradeTooLowException::what(void) const throw()
 	return (this->_msg.c_str());
 }
 
-Bureaucrat::Bureaucrat(void) : Bureaucrat("Undefined", Bureaucrat::_lowestGrade)
-{}
+// Canonical & constructors
+Bureaucrat::Bureaucrat(void) : Bureaucrat("Undefined", Bureaucrat::_lowestGrade) {}
 
 Bureaucrat::Bureaucrat(std::string const &name, int grade) :
 	_name(name), _grade(grade)
 {
 	std::cout << "Constructor for " << name << " assigned grade " << grade << std::endl;
-	this->checkGradeThrowExcept();
+	this->checkGradeThrowExcept(grade);
 }
-
 
 Bureaucrat::Bureaucrat(Bureaucrat const &c) :
 	_name(c._name), _grade(c._grade)
 {
 	std::cout << "Copy constructor for " << c._name << " assigned grade " << c._grade << std::endl;
-	this->checkGradeThrowExcept();
+	this->checkGradeThrowExcept(c._grade);
 }
 
 Bureaucrat&	Bureaucrat::operator=(Bureaucrat const &rhs)
 {
 	if (this != &rhs)
+	{
 		this->_grade = rhs.getGrade();
-	this->checkGradeThrowExcept();
+	}
+	this->checkGradeThrowExcept(this->_grade);
 	return (*this);
 }
 
@@ -64,6 +67,7 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Destructor called for " << this->_name << std::endl;
 }
 
+// Getters
 std::string const	Bureaucrat::getName(void) const
 {
 	return (this->_name);
@@ -74,26 +78,36 @@ int	Bureaucrat::getGrade(void) const
 	return (this->_grade);
 }
 
+// Member functions
 void	Bureaucrat::incrementGrade(void)
 {
-	this->_grade--;
-	this->checkGradeThrowExcept();
+	int	newGrade = this->_grade;
+	
+	newGrade--;
+	checkGradeThrowExcept(newGrade);
+	this->_grade = newGrade;
+	std::cout << this->_name << " was promoted to grade " << this->_grade << std::endl;
 }
 
 void	Bureaucrat::decrementGrade(void)
 {
-	this->_grade++;
-	this->checkGradeThrowExcept();
+	int	newGrade = this->_grade;
+	
+	newGrade++;
+	checkGradeThrowExcept(newGrade);
+	this->_grade = newGrade;
+	std::cout << this->_name << " was downgraded to grade " << this->_grade << std::endl;
 }
 
-void	Bureaucrat::checkGradeThrowExcept(void) const
+void	Bureaucrat::checkGradeThrowExcept(int grade) const
 {
-	if (this->_grade > Bureaucrat::_lowestGrade)
-		throw (Bureaucrat::GradeTooLowException("Grade too low"));
-	else if (this->_grade < _highestGrade)
+	if (grade < Bureaucrat::_highestGrade)
 		throw (Bureaucrat::GradeTooHighException("Grade too high"));
+	else if (grade > Bureaucrat::_lowestGrade)
+		throw (Bureaucrat::GradeTooLowException("Grade too low"));
 }
 
+// Non-member functions
 std::ostream&	operator<<(std::ostream& o, Bureaucrat const &rhs)
 {
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";

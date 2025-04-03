@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:39:23 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 10:15:05 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/03 10:26:28 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	private:
 		static int const	_highestGrade;
@@ -30,7 +30,7 @@ class Form
 		int const			_gradeToSign;
 		int const			_gradeToExec;
 
-		Form(void);
+		AForm(void);
 
 	public:
 		class GradeTooHighException : public std::exception
@@ -50,21 +50,33 @@ class Form
 				GradeTooLowException(std::string const &msg);
 				virtual const char* what(void) const throw() override;
 		};
+
+		class FormNotSignedException : public std::exception
+		{
+			private:
+				std::string const	_msg;
+			public:
+				FormNotSignedException(std::string const &msg);
+				virtual const char* what(void) const throw() override;
+		};
 		
-		Form(std::string const &name, int gradeToSign, int gradeToExec);
-		Form(Form const &c);
-		Form& operator=(Form const &rhs);
-		virtual ~Form(void);
+		AForm(std::string const &name, int gradeToSign, int gradeToExec);
+		AForm(AForm const &c);
+		AForm& operator=(AForm const &rhs);
+		virtual ~AForm(void);
 
 		std::string const& getName(void) const;
 		bool getSigned(void) const;
 		int const & getGradeToSign(void) const;
 		int const & getGradeToExec(void) const;
+		virtual const std::string& getTarget(void) const = 0;
 
 		void	checkGradeThrowExec(int grade) const;
 		void	beSigned(Bureaucrat	const &b);
+		void	canBeExecuted(Bureaucrat const &b) const;
+		virtual void	execute(Bureaucrat const &executor) const = 0;
 };
 
-std::ostream& operator<<(std::ostream& o, Form& rhs);
+std::ostream& operator<<(std::ostream& o, AForm& rhs);
 
 #endif

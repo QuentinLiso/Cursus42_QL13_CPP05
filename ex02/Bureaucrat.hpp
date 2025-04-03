@@ -6,16 +6,19 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:05:34 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 09:54:16 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/03 10:20:30 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
+# include "AForm.hpp"
 # include <iostream>
 # include <string>
 # include <exception>
+
+class	AForm;
 
 class	Bureaucrat
 {
@@ -26,7 +29,7 @@ class	Bureaucrat
 		int					_grade;
 
 		Bureaucrat(void);
-		
+
 	public:
 		class GradeTooHighException : public std::exception
 		{
@@ -58,6 +61,8 @@ class	Bureaucrat
 		void	incrementGrade(void);
 		void	decrementGrade(void);
 		void 	checkGradeThrowExcept(int grade) const;
+		void	signForm(AForm &f) const;
+		void	executeForm(AForm const &f) const;
 };
 
 std::ostream&	operator<<(std::ostream& o, Bureaucrat const &rhs);

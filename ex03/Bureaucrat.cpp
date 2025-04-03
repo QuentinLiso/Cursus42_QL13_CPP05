@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:05:36 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 10:24:37 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/03 10:25:50 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	Bureaucrat::checkGradeThrowExcept(int grade) const
 		throw (Bureaucrat::GradeTooLowException("Grade too low"));
 }
 
-void	Bureaucrat::signForm(Form &f) const
+void	Bureaucrat::signForm(AForm &f) const
 {
 	try
 	{
@@ -104,6 +104,20 @@ void	Bureaucrat::signForm(Form &f) const
 	catch(const std::exception &e)
 	{
 		std::cerr << this->_name << " couldn't sign " << f.getName() << " because ";
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const &f) const
+{
+	try
+	{
+		f.execute(*this);
+		std::cout << this->_name << " executed " << f.getName() << " on target " << f.getTarget()	<< std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << this->_name << " couldn't execute " << f.getName() << " because ";
 		std::cerr << e.what() << std::endl;
 	}
 }

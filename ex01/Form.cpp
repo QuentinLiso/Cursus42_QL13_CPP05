@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:39:25 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/02 14:14:53 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/03 10:38:44 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ Form::Form(void) : Form("Undefined", 1, 1) {}
 Form::Form(std::string const &name, int gradeToSign, int gradeToExec) :
 	_name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)
 {
-	checkGradeThrowExec();
+	checkGradeThrowExec(gradeToSign);
+	checkGradeThrowExec(gradeToExec);
 }
 
 Form::Form(Form const &c) :
-	_name(c._name), _gradeToSign(c._gradeToSign), _gradeToExec(c._gradeToExec)
+	_name(c._name), _signed(c._signed), _gradeToSign(c._gradeToSign), _gradeToExec(c._gradeToExec)
 {
-	checkGradeThrowExec();
+	checkGradeThrowExec(c._gradeToSign);
+	checkGradeThrowExec(c._gradeToExec);
 }
 
 Form&	Form::operator=(Form const &rhs)
@@ -54,7 +56,8 @@ Form&	Form::operator=(Form const &rhs)
 	{
 		this->_signed = rhs.getSigned();
 	}
-	checkGradeThrowExec();
+	checkGradeThrowExec(this->_gradeToSign);
+	checkGradeThrowExec(this->_gradeToExec);
 	return (*this);
 }
 
@@ -73,11 +76,11 @@ int const & Form::getGradeToSign(void) const { return (this->_gradeToSign); }
 int const & Form::getGradeToExec(void) const { return (this->_gradeToExec); }
 
 // Member functions
-void	Form::checkGradeThrowExec(void) const
+void	Form::checkGradeThrowExec(int grade) const
 {
-	if (this->_gradeToSign < Form::_highestGrade || this->_gradeToExec < Form::_highestGrade)
+	if (grade < Form::_highestGrade)
 		throw(Form::GradeTooHighException("Grade Too High !"));
-	if (this->_gradeToSign > Form::_lowestGrade || this->_gradeToExec > Form::_lowestGrade)
+	if (grade > Form::_lowestGrade)
 		throw(Form::GradeTooLowException("Grade Too Low !"));
 }
 
