@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:03:11 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 12:32:24 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:17:47 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	trycatchBureaucrat_test3(int grade, int i)
 
 int	main(void)
 {
-	std::srand(std::time(nullptr));
+	std::srand(std::time(NULL));
 
 	trycatchBureaucrat_test1(5);
 	trycatchBureaucrat_test1(1);

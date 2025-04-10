@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:51:05 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/02 18:33:44 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:19:30 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm& operator=(ShrubberyCreationForm const &rhs);
 		virtual ~ShrubberyCreationForm(void);
 
-		const std::string& getTarget(void) const;
-		void	execute(Bureaucrat const & executor) const override;
-		void	SCFormAction(void) const;
-		std::ostream& printTree(std::ostream &o) const;
+		const std::string&	getTarget(void) const;
+		virtual void		execute(Bureaucrat const & executor) const;
+		void				SCFormAction(void) const;
+		std::ostream& 		printTree(std::ostream &o) const;
 };
 
 typedef	ShrubberyCreationForm SCForm;

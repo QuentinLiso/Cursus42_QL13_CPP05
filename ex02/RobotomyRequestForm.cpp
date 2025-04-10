@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:35:42 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 09:24:30 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:22:48 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int const	RRForm::_requiredGradeToSign = 72;
 int const	RRForm::_requiredGradeToExec = 45;
 
 // Canonical & constructors
-RRForm::RobotomyRequestForm(void) : RobotomyRequestForm("Undefined") {}
+RRForm::RobotomyRequestForm(void) :
+	AForm("RobotomyRequestForm", RRForm::_requiredGradeToSign, RRForm::_requiredGradeToExec),
+	_target("Undefined")
+{}
 
 RRForm::RobotomyRequestForm(std::string const & target) :
 	AForm("RobotomyRequestForm", RRForm::_requiredGradeToSign, RRForm::_requiredGradeToExec),
@@ -25,7 +28,8 @@ RRForm::RobotomyRequestForm(std::string const & target) :
 {}
 
 RRForm::RobotomyRequestForm(RobotomyRequestForm const &c) : 
-	RobotomyRequestForm(c._target)
+	AForm("RobotomyRequestForm", RRForm::_requiredGradeToSign, RRForm::_requiredGradeToExec),
+	_target(c._target)
 {}
 
 RRForm& RRForm::operator=(RRForm const &rhs)

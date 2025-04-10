@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:05:34 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 09:54:16 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 10:25:52 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ class	Bureaucrat
 				
 			public:
 				GradeTooHighException(std::string const &msg);
-				virtual const char*	what() const throw() override;
+				virtual ~GradeTooHighException(void) throw();
+				virtual const char*	what() const throw();
 		};
 
 		class	GradeTooLowException : public std::exception
@@ -45,7 +46,8 @@ class	Bureaucrat
 				
 			public:
 				GradeTooLowException(std::string const &msg);
-				virtual const char*	what(void) const throw() override;
+				virtual ~GradeTooLowException(void) throw();
+				virtual const char*	what(void) const throw();
 		};
 
 		Bureaucrat(std::string const &name, int grade);

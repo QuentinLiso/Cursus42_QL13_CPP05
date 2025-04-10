@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:05:36 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 10:19:16 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 10:28:52 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ Bureaucrat::GradeTooHighException::GradeTooHighException(std::string const &msg)
 	_msg(msg)
 {}
 
+Bureaucrat::GradeTooHighException::~GradeTooHighException(void) throw() {}
+
 const char* Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return (this->_msg.c_str());
@@ -30,13 +32,15 @@ Bureaucrat::GradeTooLowException::GradeTooLowException(std::string const &msg) :
 	_msg(msg)
 {}
 
+Bureaucrat::GradeTooLowException::~GradeTooLowException(void) throw() {}
+
 const char*	Bureaucrat::GradeTooLowException::what(void) const throw()
 {
 	return (this->_msg.c_str());
 }
 
 // Canonical & constructors
-Bureaucrat::Bureaucrat(void) : Bureaucrat("Undefined", Bureaucrat::_lowestGrade) {}
+Bureaucrat::Bureaucrat(void) : _name("Undefined"), _grade(Bureaucrat::_lowestGrade) {}
 
 Bureaucrat::Bureaucrat(std::string const &name, int grade) :
 	_name(name), _grade(grade)

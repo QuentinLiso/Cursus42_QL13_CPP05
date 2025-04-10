@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:39:23 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 10:15:05 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:05:45 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ class Form
 				std::string const	_msg;
 			public:
 				GradeTooHighException(std::string const &msg);
-				virtual	const char* what(void) const throw() override;
+				virtual ~GradeTooHighException(void) throw();
+				virtual	const char* what(void) const throw();
 		};
 
 		class GradeTooLowException : public std::exception
@@ -48,7 +49,8 @@ class Form
 				std::string const	_msg;
 			public:
 				GradeTooLowException(std::string const &msg);
-				virtual const char* what(void) const throw() override;
+				virtual ~GradeTooLowException(void) throw();
+				virtual const char* what(void) const throw();
 		};
 		
 		Form(std::string const &name, int gradeToSign, int gradeToExec);

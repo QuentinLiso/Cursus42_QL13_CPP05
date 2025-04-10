@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:51:07 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 09:35:14 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:26:09 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int const	SCForm::_requiredGradeToSign = 145;
 int const	SCForm::_requiredGradeToExec = 137;
 
 // Canonical & constructors
-SCForm::ShrubberyCreationForm(void) : ShrubberyCreationForm("Undefined")
+SCForm::ShrubberyCreationForm(void) : 
+	AForm("ShrubberyCreationForm", SCForm::_requiredGradeToSign, SCForm::_requiredGradeToExec),
+	_target("Undefined")
 {}
 
 SCForm::ShrubberyCreationForm(std::string const &target) : 
@@ -26,7 +28,8 @@ SCForm::ShrubberyCreationForm(std::string const &target) :
 {}
 
 SCForm::ShrubberyCreationForm(SCForm const &c) :
-	SCForm(c._target)
+	AForm("ShrubberyCreationForm", SCForm::_requiredGradeToSign, SCForm::_requiredGradeToExec),
+	_target(c._target)
 {}
 
 SCForm& SCForm::operator=(SCForm const &rhs)
@@ -53,7 +56,7 @@ void	SCForm::execute(Bureaucrat const & executor) const
 void	SCForm::SCFormAction(void) const
 {
 	std::string		filename(this->_target + "_shrubbery");
-	std::ofstream	file(filename);
+	std::ofstream	file(filename.c_str());
 
 	if (!file)
 		std::cerr << "Error opening file " << filename << std::endl;
