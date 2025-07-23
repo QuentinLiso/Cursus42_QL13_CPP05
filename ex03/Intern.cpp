@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:34:20 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 14:38:52 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:45:18 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 // Exceptions
 Intern::UnknownFormException::UnknownFormException(std::string msg) : _msg(msg) {}
+
+Intern::UnknownFormException::~UnknownFormException(void) throw() {}
 
 const char*	Intern::UnknownFormException::what(void) const throw()
 {
@@ -23,9 +25,9 @@ const char*	Intern::UnknownFormException::what(void) const throw()
 // Canonical & constructors
 Intern::Intern(void) {}
 
-Intern::Intern(Intern const &c) {}
+Intern::Intern(Intern const &c) { (void)c; }
 
-Intern&	Intern::operator=(Intern const &rhs) { return (*this); }
+Intern&	Intern::operator=(Intern const &rhs) { (void)rhs; return (*this); }
 
 Intern::~Intern(void) { std::cout << "Intern destructor called" << std::endl; }
 
@@ -54,5 +56,5 @@ AForm*	Intern::makeForm(std::string const &formName, std::string const &target) 
 		}
 	}
 	throw(Intern::UnknownFormException("Form" + formName + " does not exist."));
-	return (nullptr);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:34:18 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 14:34:43 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:44:25 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ class	Intern
 				std::string	_msg;
 			public:
 				UnknownFormException(std::string msg);
-				virtual const char* what() const throw() override;
+				virtual ~UnknownFormException(void) throw();
+				virtual const char* what() const throw();
 		};
 
 		Intern(void);

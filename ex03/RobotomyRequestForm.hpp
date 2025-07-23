@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:35:40 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 09:11:02 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:39:57 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm& operator=(RobotomyRequestForm const &rhs);
 		virtual ~RobotomyRequestForm(void);
 
-		const std::string& getTarget(void) const;
-		void	execute(Bureaucrat const & executor) const override;
-		void	RRFormAction(void) const;
+		virtual const std::string&	getTarget(void) const;
+		virtual void		execute(Bureaucrat const & executor) const;
+		void				RRFormAction(void) const;
 };
 
 typedef RobotomyRequestForm RRForm;

@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:39:25 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 10:29:10 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:35:14 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ int const	AForm::_lowestGrade = 150;
 // Exceptions
 AForm::GradeTooHighException::GradeTooHighException(std::string const &msg) : _msg(msg) {}
 
+AForm::GradeTooHighException::~GradeTooHighException(void) throw() {}
+
 const char*	AForm::GradeTooHighException::what(void) const throw()
 {
 	return (this->_msg.c_str());
 }
 
 AForm::GradeTooLowException::GradeTooLowException(std::string const &msg) : _msg(msg) {}
+
+AForm::GradeTooLowException::~GradeTooLowException(void) throw() {}
 
 const char*	AForm::GradeTooLowException::what(void) const throw()
 {
@@ -34,13 +38,17 @@ const char*	AForm::GradeTooLowException::what(void) const throw()
 
 AForm::FormNotSignedException::FormNotSignedException(std::string const &msg) : _msg(msg) {}
 
+AForm::FormNotSignedException::~FormNotSignedException(void) throw() {}
+
 const char* AForm::FormNotSignedException::what(void) const throw()
 {
 	return (this->_msg.c_str());
 }
 
 // Canonical & constructors
-AForm::AForm(void) : AForm("Undefined", 1, 1) {}
+AForm::AForm(void) : 
+	_name("Undefined"), _signed(false), _gradeToSign(AForm::_highestGrade), _gradeToExec(AForm::_highestGrade)
+{}
 
 AForm::AForm(std::string const &name, int gradeToSign, int gradeToExec) :
 	_name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec)

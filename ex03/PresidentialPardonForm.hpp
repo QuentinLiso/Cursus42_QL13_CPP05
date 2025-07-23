@@ -6,7 +6,7 @@
 /*   By: qliso <qliso@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:10:53 by qliso             #+#    #+#             */
-/*   Updated: 2025/04/03 09:14:37 by qliso            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:39:53 by qliso            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ class	PresidentialPardonForm : public AForm
 		PresidentialPardonForm& operator=(PresidentialPardonForm const &rhs);
 		virtual ~PresidentialPardonForm(void);
 
-		const std::string& getTarget(void) const;
-		void	execute(Bureaucrat const & executor) const override;
-		void	PPFormAction(void) const;
+		virtual const std::string&	getTarget(void) const;
+		virtual void		execute(Bureaucrat const & executor) const;
+		void				PPFormAction(void) const;
 };
 
 typedef PresidentialPardonForm PPForm;
